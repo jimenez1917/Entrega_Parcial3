@@ -1,0 +1,43 @@
+<%- include('./partials/head') %> 
+<div class="container sm-6">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">URL</th>
+          </tr>
+        </thead>
+        <% products.forEach(product =>{ %>
+            <tbody>
+                <tr>
+                  <th scope="row"><%=product.id%></th>
+                  <td><%=product.nombre %></td>
+                  <td><%=product.descripcion %></td>
+                  <td><%=product.precio %></td>
+                  <td>
+                    <form action = "/<%=product.id%>" method = "post">
+                        <button type="submit" class="btn btn-dark">Volver al Post</button>
+                    <form>
+                  </td>
+                  <!-- <td><button onclick = "show('<%=product.id%>')">Hello</td> -->
+                </tr>
+            </tbody>
+        <% }) %> 
+    </table>
+        <form action = "/" method = "post">
+            <button type="submit" class="btn btn-dark">Volver al Post</button>
+        <form>
+    </div>
+    <script>
+        var productos = [];
+        function show(product){
+            productos.push(product);
+        }
+        function gotoCart(test){
+            console.log("productos",test)
+        }
+    </script>
+    </body>
+    </html>
