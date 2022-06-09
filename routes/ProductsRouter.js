@@ -33,7 +33,6 @@ router.get('/', async (req,res) =>{
 	// 	message: 'success',
 	// });
     // res.render('productos',products);
-    console.log(products)
 });
 router.delete('/:id',Admin, async (req,res) =>{
     const product = await productDao.delete(req.params.id);

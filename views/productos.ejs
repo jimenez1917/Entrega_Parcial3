@@ -16,27 +16,20 @@
                   <td><%=product.nombre %></td>
                   <td><%=product.descripcion %></td>
                   <td><%=product.precio %></td>
-                  <td>
-                    <form action = "/<%=product.id%>" method = "post">
-                        <button type="submit" class="btn btn-dark">Volver al Post</button>
-                    <form>
-                  </td>
-                  <!-- <td><button onclick = "show('<%=product.id%>')">Hello</td> -->
+                  <td><button onclick = "agregar('<%=product.id%>')">Agregar</td>
                 </tr>
             </tbody>
         <% }) %> 
     </table>
-        <form action = "/" method = "post">
+        <form action = "/carrito" method = "get">
             <button type="submit" class="btn btn-dark">Volver al Post</button>
         <form>
     </div>
     <script>
-        var productos = [];
-        function show(product){
-            productos.push(product);
-        }
-        function gotoCart(test){
-            console.log("productos",test)
+        function agregar(product){
+            fetch(`http://localhost:8080/${product}`,{
+                method: 'POST',
+            })
         }
     </script>
     </body>

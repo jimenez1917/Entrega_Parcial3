@@ -4,7 +4,7 @@ const MongoUser = require('./users/mongouser');
 const dbToUse = 'mongo';
 
 let productDao ;
-let cartDao;
+let userDao;
 
 switch (dbToUse) {
     case 'mongo':
@@ -15,4 +15,4 @@ switch (dbToUse) {
         break;
 }
 
-module.exports = {productDao,cartDao};
+module.exports = {productDao,userDao};

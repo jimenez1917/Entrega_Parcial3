@@ -1,6 +1,7 @@
 const passport=require('passport');
 const PassportLocal= require('passport-local').Strategy;
 const User= require('../models/user.js');
+const {userDao} = require('../daos')
 const {createHash,isValidPassword} = require('../utils/utils');
 
 const initializePassport=()=>{
@@ -43,11 +44,12 @@ const initializePassport=()=>{
 //serializacion
 
 passport.serializeUser(function(user,done){
-    done(null,user.id);
+    done(null,user._id);
 })
 
-passport.deserializeUser(function(id,done){
-    done(null,{id:1,name:'Uriel'})
+passport.deserializeUser(async(id,done)=>{
+    let result = await userDao.getBy({_id:id})
+    done(null,result)
 })
 }
 

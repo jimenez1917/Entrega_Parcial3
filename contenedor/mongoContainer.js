@@ -43,8 +43,8 @@ class MongoContainer {
 	async UploadById(id,body){
 		return await this.model.update({_id:id},{nombre:body.nombre,descripcion:body.descripcion,codigo:body.codigo,foto_url:body.foto_url,precio:body.precio,stock:body.stock});
 	}
-	async Update(products,userId){
-		return await this.model.updateOne({_id:cartId},{products:products});
+	async Update(cart,userId){
+		return await this.model.updateOne({_id:userId},{cart:cart});
 	}
 }
 
