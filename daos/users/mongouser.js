@@ -9,8 +9,6 @@ class UserDao {
         return await this.userManager.getById(user);
     }
     UploadById = async (array,user) => {
-        console.log('user',user)
-        console.log('array',array)
         return await this.userManager.Update(array,user);
     }
 }

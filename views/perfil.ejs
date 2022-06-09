@@ -1,0 +1,21 @@
+<%- include('./partials/head') %> 
+<div class="container sm-6">
+        <img src="../public/<%=body.profile_picture%>" style="width: 100px;height: 100px;">
+        <h5>Username</h5>
+        <p><%=body.username%></p>
+        <h5>nombre</h5>
+        <p><%=body.nombre%></p>
+        <h5>direccion</h5>
+        <p><%=body.direccion%></p>
+        <h5>edad</h5>
+        <p><%=body.edad%></p>
+        <h5>telefono</h5>
+        <p><%=body.telefono%></p>
+        <form action = "/logout" method = "post">
+            <button type="submit" class="btn btn-dark">LogOut</button>
+        <form>
+    </div>
+    <script>
+    </script>
+    </body>
+    </html>

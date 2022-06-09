@@ -8,9 +8,7 @@ const initializePassport=()=>{
     passport.use('signup', new PassportLocal({passReqToCallback:true},(req,username, password,done)=>{
         let {nombre,direccion,edad,telefono} = req.body;
         User.findOne({username: username},(err,user)=>{
-            console.log(typeof req.file);
             if(!req.file) return done(null,false,{message:'couldnt upload avatar'})
-            // console.log(req.file);
             if(err) return done(err);
             if(user) return done(null,false,{message:'user already exist'})
             const newUser = {

@@ -32,7 +32,6 @@ router.post('/login', passport.authenticate('loginStrategy',{
 router.post('/:id', async (req,res)=>{
     let cart=req.user[0].cart;
     let newCart= [...cart,req.params.id];
-    console.log('new',newCart);
     const product = await userDao.UploadById(newCart,req.user[0].id);
     res.redirect('/api/productos');
 })
@@ -49,10 +48,31 @@ router.get('/carrito', (req, res,next)=>{
         })
         products.push(data);        
     }
-    console.log('doris',products);
     
     // console.log('length',cart.length);
     res.render('carrito',{products:products})
 })
+router.get('/vaciar',(req,res,next)=>{
+    if (req.isAuthenticated()) return next();
+    res.redirect('/login')
+},(req,res)=>{
+    let newCart = [];
+    userDao.UploadById(newCart,req.user[0].id);
+    res.redirect('/api/productos')
+    }
+)
+router.get('/perfil',(req, res,next)=>{
+    if(req.isAuthenticated()) return next();
+    res.redirect('/login')
+}
+,(req,res)=>{
+    let body = req.user[0];
+    console.log(body);
+    res.render('perfil',{body:body});
+})
+router.post('/logout', function(req, res){
+    req.logout();
+    res.redirect('/login');
+  });
 
 module.exports = router;

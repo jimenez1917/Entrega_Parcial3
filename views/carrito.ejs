@@ -17,14 +17,13 @@
                   <td><%=product.nombre %></td>
                   <td><%=product.descripcion %></td>
                   <td><%=product.precio %></td>
-                  <td><button onclick = "agregar('<%=product.id%>')">"TODO" Eliminar</td>
                 </tr>
             </tbody>
         <% }) %> 
      </table>
-        <!-- <form action = "/" method = "post">
-            <button type="submit" class="btn btn-dark">Volver al Post</button>
-        <form> -->
+        <form action = "/vaciar" method = "get">
+            <button type="submit" class="btn btn-dark">Vaciar Carrito o volver a productos</button>
+        <form>
     </div>
     </body>
     </html>
