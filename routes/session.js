@@ -3,23 +3,47 @@ const router=express.Router();
 const passport= require('passport');
 const uploader = require('../utils/uploader.js');
 const {userDao,productDao} = require('../daos');
+const transporter = require('../config/Ndmail')
 
 
 router.get('/',(req,res,next)=>{
     if (req.isAuthenticated()) return next();
     res.redirect('/login')
 } ,(req, res) => {
-    // si ya iniciamos sesión 
-    // si no hemos iniciado sesión redireccionar a /login
+    console.log('yeaaaa')
     res.render('partials/head')
 })
 router.get('/signup',(req,res)=>{
-    if(req.isAuthenticated()) return res.redirect('/')
+    if(req.isAuthenticated()) return res.redirect('/');
     res.render('register')
 })
 router.post('/signup', uploader.single('avatar'), passport.authenticate('signup',{
     failureRedirect:'/signup'
-}),(req, res)=>{
+}),async (req,res,next)=>{
+            console.log(req.user)
+        const mailOptions = {
+        from: 'Servidor',
+        to: 'chad.reynolds79@ethereal.email',
+        subject: 'nuevo registro',
+        html: `<h5>Username</h5>
+        <p>${req.user.username}</p>
+        <h5>nombre</h5>
+        <p>${req.user.nombre}</p>
+        <h5>direccion</h5>
+        <p>${req.user.direccion}</p>
+        <h5>edad</h5>
+        <p>${req.user.edad}</p>
+        <h5>telefono</h5>
+        <p>${req.user.telefono}</p>`
+    }
+    try{
+        const info = await transporter.sendMail(mailOptions)
+        console.log(info);
+        next();
+    }catch(e){
+        console.log(e);
+    }
+},(req, res)=>{
     res.redirect('/');
 })
 router.get('/login', (req, res) => {
